@@ -1,6 +1,3 @@
-# botaim_plugin
-BotAim 2 - human-like bot aiming Plugin
-
 *******************************************
 * BotAim 2 - human-like bot aiming Plugin *
 *******************************************
