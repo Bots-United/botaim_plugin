@@ -1,13 +1,14 @@
-CPP = gcc-2.95.3
+CPP = gcc
 TARGET = botaim_mm
-ARCHFLAG = i586
+ARCHFLAG = i686
 BASEFLAGS = -Dstricmp=strcasecmp -Dstrcmpi=strcasecmp
 OPTFLAGS = -DNDEBUG
-CPPFLAGS = ${BASEFLAGS} ${OPTFLAGS} -march=${ARCHFLAG} -O2 -w -I"../metamod" -I"../../devtools/hlsdk-2.3/multiplayer/common" -I"../../devtools/hlsdk-2.3/multiplayer/dlls" -I"../../devtools/hlsdk-2.3/multiplayer/engine" -I"../../devtools/hlsdk-2.3/multiplayer/pm_shared"
+CPPFLAGS = ${BASEFLAGS} ${OPTFLAGS} -march=${ARCHFLAG} -mtune=generic -mmmx -msse -msse2 -O2 -m32 -mfpmath=sse -w \
+-I"../metamod-p/metamod" -I"../hlsdk-2.3-p4/multiplayer/common" -I"../hlsdk-2.3-p4/multiplayer/dlls" -I"../hlsdk-2.3-p4/multiplayer/engine" -I"../hlsdk-2.3-p4/multiplayer/pm_shared"
 
 OBJ = 	${TARGET}.o
 
-${TARGET}_i386.so: ${OBJ}
+${TARGET}.so: ${OBJ}
 	${CPP} -fPIC -shared -o $@ ${OBJ} -Xlinker -Map -Xlinker ${TARGET}.map -ldl
 	mv *.o Release
 	mv *.map Release

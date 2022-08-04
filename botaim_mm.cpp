@@ -64,7 +64,7 @@ const Vector g_vecZero = Vector (0, 0, 0);
 
 void WINAPI GiveFnptrsToDll (enginefuncs_t* pengfuncsFromEngine, globalvars_t *pGlobals);
 int Spawn_Post (edict_t *pent);
-void StartFrame_Post (void);
+void StartFrame_Post ();
 void TraceLine (const float *v1, const float *v2, int fNoMonsters, edict_t *pentToSkip, TraceResult *ptr);
 void BotPointGun (bot_t *pBot, bool save_angles);
 Vector UTIL_VecToAngles (const Vector &v_vector);
@@ -83,21 +83,21 @@ meta_globals_t *gpMetaGlobals;
 
 META_FUNCTIONS gMetaFunctionTable =
 {
-   NULL, // pfnGetEntityAPI()
-   NULL, // pfnGetEntityAPI_Post()
-   NULL, // pfnGetEntityAPI2()
+	nullptr, // pfnGetEntityAPI()
+	nullptr, // pfnGetEntityAPI_Post()
+	nullptr, // pfnGetEntityAPI2()
    GetEntityAPI2_Post, // pfnGetEntityAPI2_Post()
-   NULL, // pfnGetNewDLLFunctions()
-   NULL, // pfnGetNewDLLFunctions_Post()
+	nullptr, // pfnGetNewDLLFunctions()
+	nullptr, // pfnGetNewDLLFunctions_Post()
    GetEngineFunctions, // pfnGetEngineFunctions()
-   NULL, // pfnGetEngineFunctions_Post()
+	nullptr, // pfnGetEngineFunctions_Post()
 };
 
 plugin_info_t Plugin_info = {
    META_INTERFACE_VERSION, // interface version
    "BotAim", // plugin name
-   "2.3", // plugin version
-   "03/05/2005", // date of creation
+   "2.4-APG", // plugin version
+   "03/08/2022", // date of creation
    "Pierre-Marie Baty <pm@bots-united.com>", // plugin author
    "http://racc.bots-united.com", // plugin URL
    "BOTAIM", // plugin logtag
@@ -256,7 +256,7 @@ int Spawn_Post (edict_t *pent)
 }
 
 
-void StartFrame_Post (void)
+void StartFrame_Post ()
 {
    edict_t *pPlayer;
    bot_t *pBot;
@@ -414,7 +414,7 @@ void BotPointGun (bot_t *pBot, bool save_angles)
 
       // have we found no candidate ?
       if (player_index > gpGlobals->maxClients)
-         pBot->pTarget = NULL; // bot is aiming at nothing in particular
+         pBot->pTarget = nullptr; // bot is aiming at nothing in particular
    }
 
    // save bot's targeted location
@@ -587,7 +587,7 @@ void UTIL_DrawBeam (Vector start, Vector end, int red, int green, int blue)
    if (FNullEnt (pListenserverEdict))
       return; // reliability check
 
-   MESSAGE_BEGIN (MSG_ONE_UNRELIABLE, SVC_TEMPENTITY, NULL, pListenserverEdict);
+   MESSAGE_BEGIN (MSG_ONE_UNRELIABLE, SVC_TEMPENTITY, nullptr, pListenserverEdict);
    WRITE_BYTE (TE_BEAMPOINTS);
    WRITE_COORD (start.x);
    WRITE_COORD (start.y);
